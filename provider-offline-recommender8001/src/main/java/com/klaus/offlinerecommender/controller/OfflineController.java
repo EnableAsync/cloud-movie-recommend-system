@@ -11,7 +11,7 @@ import com.klaus.offlinerecommender.service.TagService;
 import com.klaus.offlinerecommender.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.image.ImageProducer;

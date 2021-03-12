@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Handler;
+
 @RequestMapping("/user")
 @CrossOrigin
 @RestController
@@ -21,21 +25,26 @@ public class UserController {
 
     @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET )
     @ResponseBody
-    public User login(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+    public Map<String, Object> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         User user  =userService.loginUser(new LoginUserRequest(username,password));
-//        model.addAttribute("success",user != null);
-//        model.addAttribute("user",user);
-        return user;
+        Map<String,Object> resultMap=new HashMap<>();
+        resultMap.put("success",user != null);
+        resultMap.put("user",user);
+        return resultMap;
     }
 
     @RequestMapping(value = "/register", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
-    public boolean addUser(@RequestParam("username") String username,@RequestParam("password") String password,Model model) {
+    public Map<String, Object> addUser(@RequestParam("username") String username, @RequestParam("password") String password) {
+        Map<String,Object> resultMap=new HashMap<>();
+        resultMap.put("success",false);
+
         if(userService.checkUserExist(username)){
 
-            return false;
+            resultMap.put("success",false);
+        }else {
+            resultMap.put("success", userService.registerUser(new RegisterUserRequest(username, password)));
         }
-        model.addAttribute("success",userService.registerUser(new RegisterUserRequest(username,password)));
-        return true;
+        return resultMap;
     }
 }
