@@ -1,0 +1,10 @@
+server:
+  port: 8007
+spring:
+  application:
+    name: cloud-recommender-service
+  data:
+    mongodb:
+      uri: "172.18.11.107"
+      port: 27017
+
