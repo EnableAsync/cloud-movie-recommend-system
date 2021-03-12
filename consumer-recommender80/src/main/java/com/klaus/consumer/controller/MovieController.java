@@ -22,7 +22,6 @@ import static com.klaus.consumer.utils.Constant.REALTIME_URL;
 public class MovieController {
 
 
-
     @Resource
     private RestTemplate restTemplate;
 
@@ -59,11 +58,12 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
-
+    @ResponseBody
     public Model getHotMovies( @RequestParam("num") int num, Model model ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("num", num);
-        Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/hot", Movie[].class, paramMap);
+        Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/hot?num={num}", Movie[].class, paramMap);
+        model.addAttribute("movies", movies);
         return getModel(model, movies);
     }
 
@@ -71,6 +71,7 @@ public class MovieController {
     public Model getRateMoreMovies( @RequestParam("num") int num, Model model ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("num", num);
+        System.out.println(num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/rate", Movie[].class, paramMap);
         return getModel(model, movies);
     }
@@ -97,8 +98,10 @@ public class MovieController {
     public Model getMovieInfo( @PathVariable("id") int id, Model model ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
-        Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/info", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Movie movie = restTemplate.getForObject(OFFLINE_URL + "/offline/info", Movie.class, paramMap);
+        model.addAttribute("movie", movie);
+        model.addAttribute("success", true);
+        return model;
     }
 
 
@@ -147,6 +150,7 @@ public class MovieController {
         for (Movie[] movies : moviesArray) {
             movieList.addAll(Arrays.asList(movies));
         }
+        System.out.println(movieList);
         model.addAttribute("success", true);
         model.addAttribute("movies", movieList);
         return model;
