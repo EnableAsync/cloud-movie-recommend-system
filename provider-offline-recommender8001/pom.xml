@@ -8,6 +8,9 @@
     <artifactId>provider-offline-recommender8001</artifactId>
 
 
+
+
+
     <parent>
         <artifactId>recommender</artifactId>
         <groupId>com.klaus.springcloud</groupId>

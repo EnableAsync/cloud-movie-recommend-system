@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class RecommenderMain8001 {
+    // 鑫哥帅帅
     public static void main(String[]args){
         SpringApplication.run(RecommenderMain8001.class,args);
     }
