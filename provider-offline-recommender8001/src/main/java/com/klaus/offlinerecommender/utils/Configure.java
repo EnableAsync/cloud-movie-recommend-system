@@ -9,16 +9,14 @@ import org.springframework.context.annotation.Configuration;
 public class Configure {
 
     @Value("${spring.data.mongodb.uri}")
-
     private String mongoHost;
-
     @Value("${spring.data.mongodb.port}")
     private int mongoPort;
 
 
     @Bean(name = "mongoClient")
-    public MongoClient getMongoClient() {
-        return new MongoClient(mongoHost, mongoPort);
+    public MongoClient getMongoClient(){
+        return new MongoClient( mongoHost , mongoPort );
     }
 
 

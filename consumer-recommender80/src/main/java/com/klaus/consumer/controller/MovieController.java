@@ -2,6 +2,7 @@ package com.klaus.consumer.controller;
 
 import com.klaus.consumer.domain.Movie;
 import com.klaus.consumer.domain.Tag;
+import com.klaus.consumer.service.MovieFeignService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -20,6 +21,15 @@ import static com.klaus.consumer.utils.Constant.REALTIME_URL;
 @RestController
 @Slf4j
 public class MovieController {
+
+
+    @Resource
+    private MovieFeignService movieFeignService;
+
+    @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
+    Movie[] getHotMovies( @RequestParam("num") int num ){
+        return movieFeignService.getHotMovies(num);
+    }
 
 
     @Resource
@@ -57,15 +67,14 @@ public class MovieController {
         return getModel(model, movies);
     }
 
-    @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
-    @ResponseBody
-    public Model getHotMovies( @RequestParam("num") int num, Model model ) {
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("num", num);
-        Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/hot?num={num}", Movie[].class, paramMap);
-        model.addAttribute("movies", movies);
-        return getModel(model, movies);
-    }
+//    @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
+//    public Movie[] getHotMovies( @RequestParam("num") int num ) {
+//        Map<String, Object> paramMap = new HashMap<>();
+//        paramMap.put("num", num);
+//        return restTemplate.getForObject(OFFLINE_URL + "/offline/hot?num={num}", Movie[].class, paramMap);
+//    }
+
+
 
     @RequestMapping(value = "/rate", produces = "application/json", method = RequestMethod.GET)
     public Model getRateMoreMovies( @RequestParam("num") int num, Model model ) {

@@ -10,5 +10,4 @@ public class ApplicationContextConfig {
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
-
 }
