@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Handler;
@@ -24,7 +25,6 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET)
-    @ResponseBody
     public Map<String, Object> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         User user = userService.loginUser(new LoginUserRequest(username, password));
         Map<String, Object> resultMap = new HashMap<>();
@@ -34,7 +34,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register", produces = "application/json", method = RequestMethod.GET)
-    @ResponseBody
     public Map<String, Object> addUser(@RequestParam("username") String username, @RequestParam("password") String password) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("success", false);
@@ -49,10 +48,20 @@ public class UserController {
     }
 
     @RequestMapping(value = "/info", produces = "application/json", method = RequestMethod.GET)
-    @ResponseBody
     public Map<String, Object> getInfo(@RequestParam("username") String username) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("success", userService.checkNew(username));
+        return resultMap;
+    }
+
+    //冷启动问题
+    @RequestMapping(value = "/pref", produces = "application/json", method = RequestMethod.GET)
+    public Map<String, Object> addPrefGenres(@RequestParam("username") String username,@RequestParam("genres") String genres) {
+        Map<String, Object> resultMap = new HashMap<>();
+        User user = userService.findByUsername(username);
+        user.getPrefGenres().addAll(Arrays.asList(genres.split(",")));
+        user.setFirst(false);
+        resultMap.put("success", userService.updateUser(user));
         return resultMap;
     }
 }
