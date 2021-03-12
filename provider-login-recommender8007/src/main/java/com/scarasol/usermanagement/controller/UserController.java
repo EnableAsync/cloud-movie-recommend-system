@@ -23,28 +23,36 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET )
+    @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> login(@RequestParam("username") String username, @RequestParam("password") String password) {
-        User user  =userService.loginUser(new LoginUserRequest(username,password));
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("success",user != null);
-        resultMap.put("user",user);
+        User user = userService.loginUser(new LoginUserRequest(username, password));
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("success", user != null);
+        resultMap.put("user", user);
         return resultMap;
     }
 
     @RequestMapping(value = "/register", produces = "application/json", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> addUser(@RequestParam("username") String username, @RequestParam("password") String password) {
-        Map<String,Object> resultMap=new HashMap<>();
-        resultMap.put("success",false);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("success", false);
 
-        if(userService.checkUserExist(username)){
+        if (userService.checkUserExist(username)) {
 
-            resultMap.put("success",false);
-        }else {
+            resultMap.put("success", false);
+        } else {
             resultMap.put("success", userService.registerUser(new RegisterUserRequest(username, password)));
         }
+        return resultMap;
+    }
+
+    @RequestMapping(value = "/info", produces = "application/json", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> getInfo(@RequestParam("username") String username) {
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("success", userService.checkNew(username));
         return resultMap;
     }
 }
