@@ -12,6 +12,7 @@
   <modules>
     <module>provider-offline-recommender8001</module>
     <module>consumer-recommender80</module>
+      <module>provider-login-recommender8007</module>
   </modules>
 
   <!-- 统一Jar版本 -->
