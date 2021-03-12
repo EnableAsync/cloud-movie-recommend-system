@@ -27,8 +27,11 @@ public class MovieController {
     private MovieFeignService movieFeignService;
 
     @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
-    Movie[] getHotMovies( @RequestParam("num") int num ){
-        return movieFeignService.getHotMovies(num);
+    public Map<String,Object> getHotMovies( @RequestParam("num") int num ){
+        Map<String,Object> resultMap=new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movieFeignService.getHotMovies(num));
+        return resultMap;
     }
 
 
@@ -37,7 +40,7 @@ public class MovieController {
 
 
     @RequestMapping(value = "/guess", produces = "application/json", method = RequestMethod.GET)
-    public Model getGuessMovies( @RequestParam("username") String username, @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getGuessMovies( @RequestParam("username") String username, @RequestParam("num") int num ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("username", username);
         paramMap.put("num", num);
@@ -45,26 +48,32 @@ public class MovieController {
         Movie[] offlineMovies = restTemplate.getForObject(OFFLINE_URL + "/offline/guess", Movie[].class, paramMap);
         // 在线
         Movie[] realTimeMovies = restTemplate.getForObject(REALTIME_URL + "/realtime/guess", Movie[].class, paramMap);
-        return getModel(model, offlineMovies, realTimeMovies);
+        return getModel(offlineMovies, realTimeMovies);
     }
 
     @RequestMapping(value = "/stream", produces = "application/json", method = RequestMethod.GET)
-    public Model getStreamMovies( @RequestParam("username") String username, @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getStreamMovies( @RequestParam("username") String username, @RequestParam("num") int num ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("username", username);
         paramMap.put("num", num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/stream", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
     }
 
     @RequestMapping(value = "/wish", produces = "application/json", method = RequestMethod.GET)
 
-    public Model getWishMovies( @RequestParam("username") String username, @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getWishMovies( @RequestParam("username") String username, @RequestParam("num") int num) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("username", username);
         paramMap.put("num", num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/wish", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
     }
 
 //    @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
@@ -77,92 +86,114 @@ public class MovieController {
 
 
     @RequestMapping(value = "/rate", produces = "application/json", method = RequestMethod.GET)
-    public Model getRateMoreMovies( @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getRateMoreMovies( @RequestParam("num") int num) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("num", num);
         System.out.println(num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/rate", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
     }
 
     @RequestMapping(value = "/new", produces = "application/json", method = RequestMethod.GET)
-    public Model getNewMovies( @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getNewMovies( @RequestParam("num") int num, Model model ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("num", num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/new", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
     }
 
 
     @RequestMapping(value = "/same/{id}", produces = "application/json", method = RequestMethod.GET)
-    public Model getSameMovie( @PathVariable("id") int id, @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getSameMovie( @PathVariable("id") int id, @RequestParam("num") int num ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         paramMap.put("num", num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/same", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
     }
 
     @RequestMapping(value = "/info/{id}", produces = "application/json", method = RequestMethod.GET)
-    public Model getMovieInfo( @PathVariable("id") int id, Model model ) {
+    public Map<String,Object> getMovieInfo( @PathVariable("id") int id ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("id", id);
         Movie movie = restTemplate.getForObject(OFFLINE_URL + "/offline/info", Movie.class, paramMap);
-        model.addAttribute("movie", movie);
-        model.addAttribute("success", true);
-        return model;
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movie);
+        return resultMap;
+
     }
 
 
     @RequestMapping(value = "/genres", produces = "application/json", method = RequestMethod.GET)
-    public Model getGenresMovies( @RequestParam("category") String category, @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getGenresMovies( @RequestParam("category") String category, @RequestParam("num") int num ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("category", category);
         paramMap.put("num", num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/genres", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
 
     }
 
     @RequestMapping(value = "/topAll", produces = "application/json", method = RequestMethod.GET)
-    public Model getTopMovies( @RequestParam("num") int num, Model model ) {
+    public Map<String,Object> getTopMovies( @RequestParam("num") int num) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("num", num);
         Movie[] movies = restTemplate.getForObject(OFFLINE_URL + "/offline/topAll", Movie[].class, paramMap);
-        return getModel(model, movies);
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("movies",movies);
+        return resultMap;
     }
 
     @RequestMapping(value = "/rate/{id}", produces = "application/json", method = RequestMethod.GET)
-    public Model rateToMovie( @PathVariable("id") int id, @RequestParam("score") Double score, @RequestParam("username") String username, Model model ) {
+    public Map<String,Object> rateToMovie( @PathVariable("id") int id, @RequestParam("score") Double score, @RequestParam("username") String username) {
         MultiValueMap<String, Object> valueMap = new LinkedMultiValueMap<>();
         valueMap.add("id", id);
         valueMap.add("score", score);
         valueMap.add("username", username);
         String message = restTemplate.postForObject(REALTIME_URL + "/realtime/rate", valueMap, String.class);
-        model.addAttribute("success", true);
-        model.addAttribute("message", message);
-        return model;
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("message",message);
+        return resultMap;
+
     }
 
     @RequestMapping(value = "/tag/{mid}", produces = "application/json", method = RequestMethod.GET)
-    public Model getMovieTags( @PathVariable("mid") int mid, Model model ) {
+    public Map<String,Object> getMovieTags( @PathVariable("mid") int mid ) {
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("mid", mid);
         Tag[] tags = restTemplate.getForObject(OFFLINE_URL + "/offline/tag", Tag[].class, paramMap);
-        model.addAttribute("success", true);
-        model.addAttribute("tags", Arrays.asList(tags));
-        return model;
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("success",true);
+        resultMap.put("tags",Arrays.asList(tags));
+        return resultMap;
+
     }
 
-    private Model getModel( Model model, Movie[]... moviesArray ) {
+    private Map<String,Object> getModel( Movie[]... moviesArray ) {
         List<Movie> movieList = new ArrayList<>();
         for (Movie[] movies : moviesArray) {
             movieList.addAll(Arrays.asList(movies));
         }
+        Map<String,Object> resultMap=new HashMap<>();
         System.out.println(movieList);
-        model.addAttribute("success", true);
-        model.addAttribute("movies", movieList);
-        return model;
+        resultMap.put("success", true);
+        resultMap.put("movies", movieList);
+        return resultMap;
     }
 
 }
