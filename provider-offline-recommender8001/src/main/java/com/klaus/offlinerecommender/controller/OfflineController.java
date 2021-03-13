@@ -1,13 +1,13 @@
 package com.klaus.offlinerecommender.controller;
 
 
-import com.klaus.offlinerecommender.model.recom.Recommendation;
 import com.klaus.offlinerecommender.model.request.*;
 import com.klaus.offlinerecommender.service.MovieService;
 import com.klaus.offlinerecommender.service.RecommenderService;
 import com.klaus.offlinerecommender.service.TagService;
 import com.klaus.offlinerecommender.service.UserService;
 import com.rai.model.domain.User;
+import com.rai.model.recom.Recommendation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

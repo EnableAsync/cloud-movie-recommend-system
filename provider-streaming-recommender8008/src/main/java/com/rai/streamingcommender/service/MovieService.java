@@ -1,8 +1,6 @@
-package com.klaus.offlinerecommender.service;
-
+package com.rai.streamingcommender.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klaus.offlinerecommender.model.request.NewRecommendationRequest;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -12,6 +10,7 @@ import com.mongodb.util.JSON;
 import com.rai.model.domain.Movie;
 import com.rai.model.domain.Rating;
 import com.rai.model.recom.Recommendation;
+import com.rai.streamingcommender.request.NewRecommendationRequest;
 import com.rai.utils.Constant;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +53,7 @@ public class MovieService {
         return rateCollection;
     }
 
-    public List<Movie> getRecommendedMovies(List<Recommendation> recommendations) {
+    public List<Movie> getRecommendeMovies(List<Recommendation> recommendations) {
         List<Integer> ids = new ArrayList<>();
         for (Recommendation rec : recommendations) {
             ids.add(rec.getMid());
@@ -62,7 +61,15 @@ public class MovieService {
         return getMovies(ids);
     }
 
-    public List<Movie>  getMovies(List<Integer> mids) {
+    public List<Movie> getHybirdRecommendeMovies(List<Recommendation> recommendations) {
+        List<Integer> ids = new ArrayList<>();
+        for (Recommendation rec : recommendations) {
+            ids.add(rec.getMid());
+        }
+        return getMovies(ids);
+    }
+
+    public List<Movie> getMovies(List<Integer> mids) {
         FindIterable<Document> documents = getMovieCollection().find(Filters.in("mid", mids));
         List<Movie> movies = new ArrayList<>();
         for (Document document : documents) {
@@ -81,7 +88,7 @@ public class MovieService {
         return movies;
     }
 
-    private Movie documentToMovie( Document document) {
+    private Movie documentToMovie(Document document) {
         Movie movie = null;
         try {
             movie = objectMapper.readValue(JSON.serialize(document), Movie.class);
@@ -89,7 +96,7 @@ public class MovieService {
             if (null == score || score.isEmpty())
                 movie.setScore(0D);
             else
-                movie.setScore(score.get("avg", 0D));
+                movie.setScore((Double) score.get("avg", 0D));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,7 +145,7 @@ public class MovieService {
         return movies;
     }
 
-    public List<Movie> getNewMovies( NewRecommendationRequest request) {
+    public List<Movie> getNewMovies(NewRecommendationRequest request) {
         FindIterable<Document> documents = getMovieCollection().find().sort(Sorts.descending("issue")).limit(request.getSum());
         List<Movie> movies = new ArrayList<>();
         for (Document document : documents) {
@@ -147,7 +154,4 @@ public class MovieService {
         return movies;
     }
 
-    public Movie[] movieList2Array(List<Movie> movieList){
-        return movieList.toArray(new Movie[0]);
-    }
 }

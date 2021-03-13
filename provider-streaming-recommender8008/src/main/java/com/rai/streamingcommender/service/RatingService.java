@@ -1,32 +1,35 @@
-package com.klaus.offlinerecommender.service;
+package com.rai.streamingcommender.service;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rai.model.domain.Rating;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
+import com.rai.model.domain.Rating;
 import com.rai.model.domain.User;
+import com.rai.streamingcommender.request.MovieRatingRequest;
 import com.rai.utils.Constant;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import redis.clients.jedis.Jedis;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RatingService {
 
     @Autowired
     private MongoClient mongoClient;
-
     @Autowired
     private ObjectMapper objectMapper;
-
+    @Autowired
+    private Jedis jedis;
 
     private MongoCollection<Document> ratingCollection;
 
@@ -36,7 +39,7 @@ public class RatingService {
         return ratingCollection;
     }
 
-    private Rating documentToRating( Document document) {
+    private Rating documentToRating(Document document) {
         Rating rating = null;
         try {
             rating = objectMapper.readValue(JSON.serialize(document), Rating.class);
@@ -47,6 +50,22 @@ public class RatingService {
 
     }
 
+    public boolean movieRating(MovieRatingRequest request) {
+        Rating rating = new Rating(request.getUid(), request.getMid(), request.getScore());
+        updateRedis(rating);
+        if (ratingExist(rating.getUid(), rating.getMid())) {
+            return updateRating(rating);
+        } else {
+            return newRating(rating);
+        }
+    }
+
+    private void updateRedis(Rating rating) {
+        if (jedis.exists("uid:" + rating.getUid()) && jedis.llen("uid:" + rating.getUid()) >= Constant.REDIS_MOVIE_RATING_QUEUE_SIZE) {
+            jedis.rpop("uid:" + rating.getUid());
+        }
+        jedis.lpush("uid:" + rating.getUid(), rating.getMid() + ":" + rating.getScore());
+    }
 
     public boolean newRating(Rating rating) {
         try {
@@ -89,7 +108,7 @@ public class RatingService {
         getRatingCollection().deleteOne(basicDBObject);
     }
 
-    public int[] getMyRatingStat( User user) {
+    public int[] getMyRatingStat(User user) {
         FindIterable<Document> documents = getRatingCollection().find(new Document("uid", user.getUid()));
         int[] stats = new int[10];
         for (Document document : documents) {
