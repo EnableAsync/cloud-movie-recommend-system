@@ -16,6 +16,7 @@
         <module>gateway-gateway9527</module>
         <module>provider-streaming-recommender8008</module>
         <module>cloud-api-commons</module>
+        <module>provider-search-recommender8005</module>
     </modules>
 
     <!-- 统一Jar版本 -->
