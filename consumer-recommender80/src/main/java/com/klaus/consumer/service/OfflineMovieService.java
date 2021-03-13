@@ -1,5 +1,6 @@
 package com.klaus.consumer.service;
 
+import com.klaus.consumer.service.impl.OfficeMovieFallbackServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Component
-@FeignClient(value = "cloud-offline-recommender-service",path = "/offline")
+@FeignClient(value = "cloud-offline-recommender-service",path = "/offline", fallback = OfficeMovieFallbackServiceImpl.class)
 public interface OfflineMovieService {
 
 
