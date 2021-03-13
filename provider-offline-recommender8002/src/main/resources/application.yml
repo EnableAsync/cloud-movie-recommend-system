@@ -2,7 +2,7 @@ server:
   port: 8002
 spring:
   application:
-    name: cloud-recommender-service
+    name: CLOUD-OFFLINE-RECOMMENDER-SERVICE
   data:
     mongodb:
       uri: "172.18.11.107"
@@ -10,10 +10,10 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848,localhost:8849 #配置nacos地址
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
+        server-addr: localhost:8848  #配置nacos地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 

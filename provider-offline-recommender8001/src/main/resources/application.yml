@@ -2,7 +2,7 @@ server:
   port: 8001
 spring:
   application:
-    name: cloud-offline-recommender-service
+    name: CLOUD-OFFLINE-RECOMMENDER-SERVICE
   data:
     mongodb:
       uri: "172.18.11.107"
@@ -11,7 +11,7 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848 #配置nacos地址
-    sentinel:
+      sentinel:
       transport:
         #配置Sentinel dashboard地址
         dashboard: localhost:8080

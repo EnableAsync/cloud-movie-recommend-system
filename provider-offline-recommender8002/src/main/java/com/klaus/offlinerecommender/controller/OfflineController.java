@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Random;
 
-@RequestMapping("/offline")
 @CrossOrigin
 @RestController
 @Slf4j
+@RequestMapping("/offline")
 public class OfflineController {
     @Autowired
     MovieService movieService;
@@ -33,6 +33,11 @@ public class OfflineController {
 
     @Autowired
     private TagService tagService;
+
+    @GetMapping(value = "/testBalancer")
+    public String paymentFeignTimeout(){
+        return "Test balancer--8002";
+    }
 
 //    @RequestMapping(value = "/guess", produces = "application/json", method = RequestMethod.GET)
 //    public Movie[] getGuessMovies( @RequestParam("username") String username, @RequestParam("num") int num ) {
