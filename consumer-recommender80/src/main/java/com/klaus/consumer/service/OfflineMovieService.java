@@ -11,7 +11,10 @@ import java.util.Map;
 public interface OfflineMovieService {
 
 
-    @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
+    @RequestMapping(value = "/guess", produces = "application/json", method = RequestMethod.GET)
+    public Map<String,Object> getGuessMovies( @RequestParam("username") String username, @RequestParam("num") int num );
+
+        @RequestMapping(value = "/hot", produces = "application/json", method = RequestMethod.GET)
     Map<String, Object> getHotMovies( @RequestParam("num") int num );
 
     @RequestMapping(value = "/wish", produces = "application/json", method = RequestMethod.GET)
