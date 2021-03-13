@@ -1,4 +1,4 @@
-package com.klaus.offlinerecommender.service;
+package com.rai.streamingcommender.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

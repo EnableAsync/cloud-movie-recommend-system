@@ -1,4 +1,4 @@
-package com.klaus.offlinerecommender.utils;
+package com.rai.utils;
 
 public class Constant {
 

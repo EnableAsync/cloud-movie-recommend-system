@@ -1,10 +1,10 @@
-package com.klaus.offlinerecommender.model.recom;
+package com.rai.model.recom;
 
 /**
- * 推荐项目的包装
+ * @Auther EnableAsync
+ * @Date 2021/3/13
  */
 public class Recommendation {
-
     // 电影ID
     private int mid;
 
