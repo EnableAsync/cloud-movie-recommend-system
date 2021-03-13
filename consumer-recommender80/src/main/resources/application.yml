@@ -2,11 +2,20 @@ server:
   port: 80
 spring:
   application:
-    name: cloud-consumer-service
+    name: CLOUD-RECOMMENDER-CONSUMER
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848 #配置nacos地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+ribbon:
+  ReadTimeout: 5000
+  ConnectionTimeout: 5000
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule
 feign:
   sentinel:
     enabled: true
