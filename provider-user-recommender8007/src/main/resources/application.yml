@@ -1,0 +1,18 @@
+server:
+  port: 8007
+spring:
+  application:
+    name: cloud-user-service
+  data:
+    mongodb:
+      uri: "172.18.11.107"
+      port: 27017
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848  #配置nacos地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

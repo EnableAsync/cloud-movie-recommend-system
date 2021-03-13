@@ -15,10 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Handler;
 
-@RequestMapping("/user")
 @CrossOrigin
 @RestController
 @Slf4j
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired

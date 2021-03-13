@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Component
-@FeignClient(value = "CLOUD-OFFLINE-RECOMMENDER-SERVICE",path = "/offline")
+@FeignClient(value = "cloud-offline-recommender-service",path = "/offline")
 public interface OfflineMovieService {
 
 

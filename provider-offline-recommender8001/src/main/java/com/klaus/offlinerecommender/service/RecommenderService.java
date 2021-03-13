@@ -53,13 +53,6 @@ public class RecommenderService {
     }
 
 
-    // 实时推荐
-    public List<Recommendation> findStreamRecs( int uid, int maxItems ) {
-        MongoCollection<Document> streamRecsCollection = mongoClient.getDatabase(Constant.MONGODB_DATABASE).getCollection(Constant.MONGODB_STREAM_RECS_COLLECTION);
-        Document streamRecs = streamRecsCollection.find(new Document("uid", uid)).first();
-        return parseRecs(streamRecs, maxItems);
-    }
-
 
 
     private List<Recommendation> parseRecs( Document document, int maxItems ) {
@@ -90,16 +83,10 @@ public class RecommenderService {
             hybridRecommendations.add(new Recommendation(recommendation.getMid(), recommendation.getScore() * CF_RATING_FACTOR));
         }
 
-//        List<Recommendation> cbRecs = findContentBasedMoreLikeThisRecommendations(productId, maxItems);
         List<Recommendation> cbRecs = findContentByMongoDb(productId, maxItems);
         System.out.println(cbRecs);
         for (Recommendation recommendation : cbRecs) {
             hybridRecommendations.add(new Recommendation(recommendation.getMid(), recommendation.getScore() * CB_RATING_FACTOR));
-        }
-
-        List<Recommendation> streamRecs = findStreamRecs(productId, maxItems);
-        for (Recommendation recommendation : streamRecs) {
-            hybridRecommendations.add(new Recommendation(recommendation.getMid(), recommendation.getScore() * SR_RATING_FACTOR));
         }
 
         Collections.sort(hybridRecommendations, new Comparator<Recommendation>() {
