@@ -1,5 +1,6 @@
 package com.klaus.consumer.service;
 
+import com.klaus.consumer.service.impl.UserFallbackServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Component
-@FeignClient(value = "cloud-user-service", path = "/user")
+@FeignClient(value = "cloud-user-service", path = "/user", fallback = UserFallbackServiceImpl.class)
 public interface UserService {
     @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET)
     Map<String, Object> login( @RequestParam("username") String username, @RequestParam("password") String password );

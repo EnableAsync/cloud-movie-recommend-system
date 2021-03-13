@@ -7,7 +7,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 public class RecommenderMain8001 {
-    // 鑫哥帅帅
     public static void main(String[] args) {
         SpringApplication.run(RecommenderMain8001.class, args);
     }
