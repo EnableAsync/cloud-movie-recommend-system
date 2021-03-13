@@ -11,7 +11,7 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848 #配置nacos地址
-      sentinel:
+    sentinel:
       transport:
         #配置Sentinel dashboard地址
         dashboard: localhost:8080

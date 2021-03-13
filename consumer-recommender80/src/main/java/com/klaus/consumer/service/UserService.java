@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Component
 @FeignClient(value = "cloud-user-service", path = "/user")
-public interface OfflineUserService {
+public interface UserService {
     @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET)
     Map<String, Object> login( @RequestParam("username") String username, @RequestParam("password") String password );
 
