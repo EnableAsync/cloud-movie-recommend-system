@@ -53,8 +53,6 @@ public class RecommenderService {
     }
 
 
-
-
     private List<Recommendation> parseRecs( Document document, int maxItems ) {
         List<Recommendation> recommendations = new ArrayList<>();
         if (null == document || document.isEmpty())
