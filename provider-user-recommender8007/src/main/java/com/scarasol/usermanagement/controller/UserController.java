@@ -1,19 +1,17 @@
 package com.scarasol.usermanagement.controller;
 
 
-import com.scarasol.usermanagement.model.domain.User;
+import com.rai.model.domain.User;
 import com.scarasol.usermanagement.model.request.LoginUserRequest;
 import com.scarasol.usermanagement.model.request.RegisterUserRequest;
 import com.scarasol.usermanagement.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 
 @CrossOrigin
 @RestController

@@ -1,6 +1,7 @@
 package com.klaus.consumer.service.impl;
-import com.klaus.consumer.domain.Movie;
+
 import com.klaus.consumer.service.OfflineMovieService;
+import com.rai.model.domain.Movie;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,6 +21,11 @@ public class OfficeMovieFallbackServiceImpl implements OfflineMovieService {
         map.put("movies", new ArrayList<Movie>());
         map.put("fallback", true);
         return map;
+    }
+
+    @Override
+    public Map<String, Object> getGuessMovies(String username, int num) {
+        return fail();
     }
 
     @Override

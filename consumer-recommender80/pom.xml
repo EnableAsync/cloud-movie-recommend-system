@@ -55,6 +55,11 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.rai.springcloud</groupId>
+            <artifactId>cloud-api-commons</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

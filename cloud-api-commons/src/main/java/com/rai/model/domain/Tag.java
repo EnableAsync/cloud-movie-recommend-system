@@ -1,10 +1,11 @@
-package com.klaus.offlinerecommender.model.domain;
+package com.rai.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tag {
+public class Tag implements Serializable {
 
     @JsonIgnore
     private String _id;

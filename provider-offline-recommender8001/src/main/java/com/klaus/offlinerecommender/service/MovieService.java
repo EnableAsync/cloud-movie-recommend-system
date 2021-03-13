@@ -2,8 +2,6 @@ package com.klaus.offlinerecommender.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klaus.offlinerecommender.model.domain.Movie;
-import com.klaus.offlinerecommender.model.domain.Rating;
 import com.klaus.offlinerecommender.model.recom.Recommendation;
 import com.klaus.offlinerecommender.model.request.NewRecommendationRequest;
 import com.klaus.offlinerecommender.utils.Constant;
@@ -13,6 +11,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.util.JSON;
+import com.rai.model.domain.Movie;
+import com.rai.model.domain.Rating;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,7 @@ public class MovieService {
         return rateCollection;
     }
 
-    public List<Movie> getRecommendedMovies( List<Recommendation> recommendations) {
+    public List<Movie> getRecommendedMovies(List<Recommendation> recommendations) {
         List<Integer> ids = new ArrayList<>();
         for (Recommendation rec : recommendations) {
             ids.add(rec.getMid());
@@ -96,7 +96,7 @@ public class MovieService {
         return movie;
     }
 
-    private Rating documentToRating( Document document) {
+    private Rating documentToRating(Document document) {
         Rating rating = null;
         try {
             rating = objectMapper.readValue(JSON.serialize(document), Rating.class);

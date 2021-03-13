@@ -1,6 +1,5 @@
 package com.klaus.consumer.service.impl;
 
-import com.klaus.consumer.domain.Movie;
 import com.klaus.consumer.service.UserService;
 import org.springframework.stereotype.Service;
 

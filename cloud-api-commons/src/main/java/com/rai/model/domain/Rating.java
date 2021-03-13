@@ -1,11 +1,11 @@
-package com.klaus.offlinerecommender.model.domain;
+package com.rai.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Tag {
-
+public class Rating implements Serializable {
     @JsonIgnore
     private String _id;
 
@@ -13,18 +13,18 @@ public class Tag {
 
     private int mid;
 
-    private String tag;
+    private double score;
 
     private long timestamp;
 
-    public Tag(int uid, int mid, String tag) {
-        this.uid = uid;
-        this.mid = mid;
-        this.tag = tag;
-        this.timestamp = new Date().getTime();
+    public Rating() {
     }
 
-    public Tag() {
+    public Rating(int uid, int mid, double score) {
+        this.uid = uid;
+        this.mid = mid;
+        this.score = score;
+        this.timestamp = new Date().getTime();
     }
 
     public int getUid() {
@@ -43,12 +43,12 @@ public class Tag {
         this.mid = mid;
     }
 
-    public String getTag() {
-        return tag;
+    public double getScore() {
+        return score;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public long getTimestamp() {

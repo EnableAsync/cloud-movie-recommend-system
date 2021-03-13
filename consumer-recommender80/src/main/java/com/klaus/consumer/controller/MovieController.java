@@ -68,7 +68,7 @@ public class MovieController {
 
     @RequestMapping(value = "/topAll", produces = "application/json", method = RequestMethod.GET)
     public Map<String, Object> getTopMovies( @RequestParam("num") int num ) {
-        return getTopMovies(num);
+        return offlineMovieService.getTopMovies(num);
     }
 
 //    @RequestMapping(value = "/rate/{id}", produces = "application/json", method = RequestMethod.GET)

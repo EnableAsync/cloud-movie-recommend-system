@@ -9,7 +9,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.util.JSON;
-import com.scarasol.usermanagement.model.domain.User;
+import com.rai.model.domain.User;
 import com.scarasol.usermanagement.model.request.LoginUserRequest;
 import com.scarasol.usermanagement.model.request.RegisterUserRequest;
 import com.scarasol.usermanagement.utils.Constant;

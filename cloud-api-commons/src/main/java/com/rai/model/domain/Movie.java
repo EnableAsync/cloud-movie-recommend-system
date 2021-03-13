@@ -1,16 +1,20 @@
-package com.klaus.consumer.domain;
+package com.rai.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Movie {
+public class Movie implements Serializable {
 
     @JsonIgnore
     private String _id;

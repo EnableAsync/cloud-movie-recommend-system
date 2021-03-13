@@ -2,11 +2,11 @@ package com.klaus.offlinerecommender.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klaus.offlinerecommender.model.domain.User;
 import com.klaus.offlinerecommender.utils.Constant;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
+import com.rai.model.domain.User;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +30,7 @@ public class UserService {
     }
 
 
-    private User documentToUser( Document document ) {
+    private User documentToUser(Document document) {
         try {
             return objectMapper.readValue(JSON.serialize(document), User.class);
         } catch (IOException e) {
@@ -40,7 +40,7 @@ public class UserService {
     }
 
 
-    public User findByUsername( String username ) {
+    public User findByUsername(String username) {
         Document user = getUserCollection().find(new Document("username", username)).first();
         if (null == user || user.isEmpty())
             return null;

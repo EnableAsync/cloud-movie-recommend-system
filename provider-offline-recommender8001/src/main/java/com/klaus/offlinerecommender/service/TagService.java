@@ -1,6 +1,6 @@
 package com.klaus.offlinerecommender.service;
 
-import com.klaus.offlinerecommender.model.domain.Tag;
+
 import com.klaus.offlinerecommender.utils.Constant;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,6 +11,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
+import com.rai.model.domain.Tag;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class TagService {
         return tagCollection;
     }
 
-    private Tag documentToTag( Document document ) {
+    private Tag documentToTag(Document document ) {
         try {
             return objectMapper.readValue(JSON.serialize(document), Tag.class);
         } catch (IOException e) {

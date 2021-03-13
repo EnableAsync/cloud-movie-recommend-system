@@ -3,14 +3,15 @@ package com.klaus.offlinerecommender.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klaus.offlinerecommender.model.domain.Rating;
-import com.klaus.offlinerecommender.model.domain.User;
+import com.rai.model.domain.Movie;
+import com.rai.model.domain.Rating;
 import com.klaus.offlinerecommender.utils.Constant;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
+import com.rai.model.domain.User;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
