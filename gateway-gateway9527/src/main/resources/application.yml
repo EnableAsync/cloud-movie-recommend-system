@@ -12,11 +12,15 @@ spring:
           enabled: true
       routes:
         - id: consumer-recommender
-          uri: lb://CLOUD-RECOMMENDER-CONSUMER
+          uri: lb://cloud-recommender-consumer
+          predicates:
+            - Path=/rest/**
+
 
     nacos:
       discovery:
         server-addr: localhost:8848 #配置nacos地址
+
 management:
   endpoints:
     web:

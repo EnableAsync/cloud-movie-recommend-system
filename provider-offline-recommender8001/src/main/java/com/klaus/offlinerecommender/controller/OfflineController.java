@@ -112,7 +112,7 @@ public class OfflineController {
     public Map<String, Object> getMovieInfo(@PathVariable("id") int id) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("success", true);
-        resultMap.put("movies", movieService.findByMID(id));
+        resultMap.put("movie", movieService.findByMID(id));
         return resultMap;
     }
 

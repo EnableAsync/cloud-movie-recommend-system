@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping(value = "/info", produces = "application/json", method = RequestMethod.GET)
     public Map<String, Object> getInfo(@RequestParam("username") String username) {
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("success", userService.checkNew(username));
+        resultMap.put("new", userService.checkNew(username));
         return resultMap;
     }
 

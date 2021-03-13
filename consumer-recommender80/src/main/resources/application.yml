@@ -2,7 +2,7 @@ server:
   port: 8088
 spring:
   application:
-    name: CLOUD-RECOMMENDER-CONSUMER
+    name: cloud-recommender-consumer
   cloud:
     nacos:
       discovery:
