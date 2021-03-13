@@ -1,5 +1,5 @@
 server:
-  port: 8005
+  port: 9001
 spring:
   application:
     name: cloud-search-recommender-service
@@ -9,7 +9,7 @@ spring:
       port: 27017
     elasticsearch:
       esClusterName: localhost
-      esHost: "172.18.11.107"
+      esHost: 127.0.0.1
       esPort: 9200
 
   cloud:

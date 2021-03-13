@@ -32,6 +32,11 @@ public class MovieController {
         return offlineMovieService.getHotMovies(num);
     }
 
+    @RequestMapping(value = "/stream", produces = "application/json", method = RequestMethod.GET)
+    public Map<String, Object> getStreamMovies(@RequestParam("username") String username, @RequestParam("num") int num) {
+        return streamingMovieService.getStreamMovies(username, num);
+    }
+
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/guess", produces = "application/json", method = RequestMethod.GET)
@@ -48,6 +53,8 @@ public class MovieController {
         }
         return map;
     }
+
+
 
 
     @RequestMapping(value = "/wish", produces = "application/json", method = RequestMethod.GET)
@@ -98,5 +105,7 @@ public class MovieController {
     public Map<String, Object> getMovieTags(@PathVariable("mid") int mid) {
         return offlineMovieService.getMovieTags(mid);
     }
+
+
 
 }

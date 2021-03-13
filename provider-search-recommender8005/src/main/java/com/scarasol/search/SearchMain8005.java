@@ -6,8 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class SearchMain {
+public class SearchMain8005 {
     public static void main(String[]args){
-        SpringApplication.run(SearchMain.class,args);
+        SpringApplication.run(SearchMain8005.class,args);
     }
 }
