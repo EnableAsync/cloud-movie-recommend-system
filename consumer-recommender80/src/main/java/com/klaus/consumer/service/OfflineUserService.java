@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Component
-@FeignClient(value = "CLOUD-USER-SERVICE", path = "/user")
+@FeignClient(value = "cloud-user-service", path = "/user")
 public interface OfflineUserService {
     @RequestMapping(value = "/login", produces = "application/json", method = RequestMethod.GET)
     Map<String, Object> login( @RequestParam("username") String username, @RequestParam("password") String password );

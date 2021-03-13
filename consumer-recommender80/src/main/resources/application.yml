@@ -2,7 +2,7 @@ server:
   port: 80
 spring:
   application:
-    name: CLOUD-RECOMMENDER-CONSUMER
+    name: cloud-recommender-consumer
   cloud:
     nacos:
       discovery:
@@ -16,4 +16,3 @@ management:
 ribbon:
   ReadTimeout: 5000
   ConnectionTimeout: 5000
-  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule

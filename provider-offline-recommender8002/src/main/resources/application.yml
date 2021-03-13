@@ -2,7 +2,7 @@ server:
   port: 8002
 spring:
   application:
-    name: CLOUD-OFFLINE-RECOMMENDER-SERVICE
+    name: cloud-offline-recommender-service
   data:
     mongodb:
       uri: "172.18.11.107"

@@ -2,7 +2,7 @@ server:
   port: 8007
 spring:
   application:
-    name: CLOUD-USER-SERVICE
+    name: cloud-user-service
   data:
     mongodb:
       uri: "172.18.11.107"
