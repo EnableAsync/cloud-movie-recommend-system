@@ -8,14 +8,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class Configure {
 
-//    private String mongoHost = "192.168.40.137";
-//    private int mongoPort = 27017;
-//
-//
-//    @Bean(name = "mongoClient")
-//    public MongoClient getMongoClient(){
-//        return new MongoClient( mongoHost , mongoPort );
-//    }
 
     @Value("${spring.data.mongodb.uri}")
     private String mongoHost;

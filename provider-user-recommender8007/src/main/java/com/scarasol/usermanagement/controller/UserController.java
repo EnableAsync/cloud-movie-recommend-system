@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("ALL")
 @CrossOrigin
 @RestController
 @Slf4j

@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>provider-login-recommender8007</artifactId>
+    <artifactId>provider-user-recommender8007</artifactId>
 
     <dependencies>
         <dependency>
