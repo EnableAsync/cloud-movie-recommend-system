@@ -11,9 +11,9 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848,localhost:8849 #配置nacos地址
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
