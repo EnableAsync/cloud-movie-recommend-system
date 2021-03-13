@@ -1,16 +1,21 @@
 server:
-  port: 8007
+  port: 8005
 spring:
   application:
-    name: cloud-user-service
+    name: cloud-search-recommender-service
   data:
     mongodb:
       uri: "172.18.11.107"
       port: 27017
+    elasticsearch:
+      esClusterName: localhost
+      esHost: "172.18.11.107"
+      esPort: 9200
+
   cloud:
     nacos:
       discovery:
-        server-addr: localhost:8848  #配置nacos地址
+        server-addr: localhost:8848 #配置nacos地址
     sentinel:
       transport:
         #配置Sentinel dashboard地址
@@ -25,6 +30,7 @@ spring:
             groupId: DEFAULT_GROUP
             data_type: json
             rule-type: flow
+
 management:
   endpoints:
     web:
