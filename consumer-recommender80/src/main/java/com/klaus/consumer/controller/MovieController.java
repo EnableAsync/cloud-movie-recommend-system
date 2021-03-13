@@ -35,7 +35,7 @@ public class MovieController {
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/guess", produces = "application/json", method = RequestMethod.GET)
-    public Map<String, Object> getGuessMovies(@RequestParam("username") String username, @RequestParam("num") int num, Model model) {
+    public Map<String, Object> getGuessMovies(@RequestParam("username") String username, @RequestParam("num") int num) {
         Map<String, Object> map = offlineMovieService.getGuessMovies(username, num);
         if (map.containsKey("movies")) {
             List<Movie> movies = (List<Movie>) map.get("movies");
@@ -52,7 +52,7 @@ public class MovieController {
 
     @RequestMapping(value = "/wish", produces = "application/json", method = RequestMethod.GET)
 
-    public Map<String, Object> getWishMovies(@RequestParam("username") String username, @RequestParam("num") int num, Model model) {
+    public Map<String, Object> getWishMovies(@RequestParam("username") String username, @RequestParam("num") int num) {
         return offlineMovieService.getWishMovies(username, num);
     }
 
@@ -69,7 +69,7 @@ public class MovieController {
 
 
     @RequestMapping(value = "/same/{id}", produces = "application/json", method = RequestMethod.GET)
-    public Map<String, Object> getSameMovie(@PathVariable("id") int id, @RequestParam("num") int num, Model model) {
+    public Map<String, Object> getSameMovie(@PathVariable("id") int id, @RequestParam("num") int num) {
         return offlineMovieService.getSameMovie(id, num);
     }
 
@@ -80,7 +80,7 @@ public class MovieController {
 
 
     @RequestMapping(value = "/genres", produces = "application/json", method = RequestMethod.GET)
-    public Map<String, Object> getGenresMovies(@RequestParam("category") String category, @RequestParam("num") int num, Model model) {
+    public Map<String, Object> getGenresMovies(@RequestParam("category") String category, @RequestParam("num") int num) {
         return offlineMovieService.getGenresMovies(category, num);
     }
 
@@ -90,7 +90,7 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/rate/{id}", produces = "application/json", method = RequestMethod.GET)
-    public Map<String, Object> rateToMovie(@PathVariable("id") int id, @RequestParam("score") Double score, @RequestParam("username") String username, Model model) {
+    public Map<String, Object> rateToMovie(@PathVariable("id") int id, @RequestParam("score") Double score, @RequestParam("username") String username) {
         return streamingMovieService.rateToMovie(id, score, username);
     }
 
