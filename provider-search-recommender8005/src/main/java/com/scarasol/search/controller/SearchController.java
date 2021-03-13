@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("ALL")
 @CrossOrigin
@@ -25,10 +27,11 @@ public class SearchController {
     private RecommenderService recommenderService;
 
     @RequestMapping(value = "/search", produces = "application/json", method = RequestMethod.GET )
-    public Model getSearchMovies(@RequestParam("query")String query, Model model) {
+    public Map<String, Object> getSearchMovies(@RequestParam("query")String query) {
         List<Recommendation> recommendations = recommenderService.getContentBasedSearchRecommendations(new SearchRecommendationRequest(query,100));
-        model.addAttribute("success",true);
-        model.addAttribute("movies",movieService.getRecommendeMovies(recommendations));
-        return model;
+        Map<String, Object> map = new HashMap<>();
+        map.put("success", true);
+        map.put("movies", movieService.getRecommendeMovies(recommendations));
+        return map;
     }
 }
