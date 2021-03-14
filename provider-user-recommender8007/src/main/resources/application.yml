@@ -5,7 +5,7 @@ spring:
     name: cloud-user-service
   data:
     mongodb:
-      uri: "172.18.11.107"
+      uri: "127.0.0.1"
       port: 27017
   cloud:
     nacos:

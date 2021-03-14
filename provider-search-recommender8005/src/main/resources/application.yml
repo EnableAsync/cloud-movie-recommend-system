@@ -1,35 +1,35 @@
 server:
-  port: 9001
+  port: 8005
 spring:
   application:
     name: cloud-search-recommender-service
-  data:
-    mongodb:
-      uri: "172.18.11.107"
-      port: 27017
-    elasticsearch:
-      esClusterName: localhost
-      esHost: 127.0.0.1
-      esPort: 9200
+#  data:
+#    mongodb:
+#      uri: "127.0.0.1"
+#      port: 27017
+#    elasticsearch:
+#      esClusterName: localhost
+#      esHost: "127.0.0.1"
+#      esPort: 9200
 
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848 #配置nacos地址
-    sentinel:
-      transport:
-        #配置Sentinel dashboard地址
-        dashboard: localhost:8080
-        #默认8719端口,假如被占用会自动从8719开始依次+1扫描,直至找到未被占用的端口
-        port: 8719
-      datasource:
-        dsl:
-          nacos:
-            server-addr: localhost:8848
-            dataId: cloudalibaba-sentinel-service
-            groupId: DEFAULT_GROUP
-            data_type: json
-            rule-type: flow
+#    sentinel:
+#      transport:
+#        #配置Sentinel dashboard地址
+#        dashboard: localhost:8080
+#        #默认8719端口,假如被占用会自动从8719开始依次+1扫描,直至找到未被占用的端口
+#        port: 8719
+#      datasource:
+#        dsl:
+#          nacos:
+#            server-addr: localhost:8848
+#            dataId: cloudalibaba-sentinel-service
+#            groupId: DEFAULT_GROUP
+#            data_type: json
+#            rule-type: flow
 
 management:
   endpoints:
