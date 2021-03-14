@@ -54,3 +54,7 @@
 
 ## 实时推荐
 ![实时推荐](docs/实时推荐.jpg)
+
+## 前端
+使用了 Vue + Vuetify，详情见
+[推荐系统前端](https://github.com/EnableAsync/recommender-frontend)
